@@ -1,0 +1,13 @@
+// @flow
+const XS_BREAKPOINT = 400;
+const SM_BREAKPOINT = 720;
+const MD_BREAKPOINT = 1024;
+const LG_BREAKPOINT = 1440;
+
+export const BREAKPOINTS = {
+  xs: XS_BREAKPOINT,
+  sm: SM_BREAKPOINT,
+  md: MD_BREAKPOINT,
+  lg: LG_BREAKPOINT,
+  header: MD_BREAKPOINT,
+};
