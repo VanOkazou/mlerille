@@ -4,18 +4,25 @@ import { ScreenContent, ScreenWrapper } from './Screen.style';
 
 type Props = {
   children: Node,
+  paddingX?: string,
+  paddingY?: string,
 };
 
 function Screen(props: Props) {
-  const { children, ...rest } = props;
+  const { children, paddingX, paddingY, ...rest } = props;
 
   return (
     <ScreenWrapper {...rest}>
-      <ScreenContent>
+      <ScreenContent paddingX={paddingX} paddingY={paddingY}>
         {children}
       </ScreenContent>
     </ScreenWrapper>
   );
+}
+
+Screen.defaultProps = {
+  paddingX: undefined,
+  paddingY: undefined,
 }
 
 Screen.displayName = 'Screen';

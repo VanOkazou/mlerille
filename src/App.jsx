@@ -1,38 +1,36 @@
 // flow
 import React from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
-import { Element } from 'react-scroll';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import Reset from './reset';
-import Nav from './components/nav';
-import About from './screens/about';
+import Login from './screens/login';
 import Home from './screens/home';
-import Works from './screens/works';
-
+import Work from './screens/work';
 import theme from './theme';
 
-const NAV = [
-  { id: 'works', label: 'Works' },
-  { id: 'about', label: 'About' },
-  { id: 'home', label: 'Home' },
-];
+import configureStore from './store/configureStore';
+import requireAuthentication from './hoc/requireAuthentication';
+import { HOME_PATH, LOGIN_PATH, WORK_PATH } from './constants';
 
-const COMPONENTS = {
-  home: <Home />,
-  about: <About />,
-  works: <Works />,
-}
+const store = configureStore({});
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <>
-        <Reset />
-        <Nav items={NAV} />
+    <Router>
+      <ReduxProvider store={store}>
+        <ThemeProvider theme={theme}>
+          <>
+            <Reset />
 
-        {Object.keys(COMPONENTS).map(id => <Element name={id}>{COMPONENTS[id]}</Element>)}
-      </>
-    </ThemeProvider>
+            <Route path={HOME_PATH} exact component={requireAuthentication(Home)} />
+            <Route path={LOGIN_PATH} component={Login} />
+            <Route path={`${WORK_PATH}:id`} component={Work} />
+          </>
+        </ThemeProvider>
+      </ReduxProvider>
+    </Router>
   );
 }
 

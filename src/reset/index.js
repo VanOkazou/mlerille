@@ -1,7 +1,5 @@
 // @flow
-import styled, { createGlobalStyle, css } from 'styled-components';
-import { space } from 'styled-system';
-import { inherits } from 'util';
+import { createGlobalStyle } from 'styled-components';
 
 const Reset = createGlobalStyle`
   *,

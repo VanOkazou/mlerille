@@ -1,17 +1,35 @@
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Screen from '../../components/screen';
 import Work from '../../components/work';
+import { CLIENT } from '../../config';
+import { WORK_PATH } from '../../constants';
+import { getCoverUrl, getTitle } from '../../utils/work';
 
-function Home(props: Object) {
+function Works(props: Object) {
   const { ...rest } = props;
+  const [works, setWorks] = useState(null);
+
+  useEffect(() => {
+    CLIENT.getEntries({ content_type: 'project' }).then(function(data) {
+      setWorks(data.items);
+    });
+  }, []);
 
   return (
     <Screen minHeight="100vh" {...rest}>
-      <Work title="L’espace Paris by Steelcase" imageUrl="https://i.ytimg.com/vi/ruy7UlWz0F0/maxresdefault.jpg" />
+      {works &&
+        works.map(work => (
+          <Work
+            key={work.sys.id}
+            title={getTitle(work)}
+            imageUrl={getCoverUrl(work)}
+            path={`${WORK_PATH}${work.sys.id}`}
+          />
+        ))}
     </Screen>
   );
 }
 
-Home.displayName = 'Home';
-export default Home;
+Works.displayName = 'Works';
+export default Works;

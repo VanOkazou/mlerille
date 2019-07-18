@@ -3,16 +3,16 @@ import React from 'react';
 import { NavWrapper } from './Nav.style';
 import { Link } from 'react-scroll';
 
-type Props = {
-  items: Array<Object>,
-};
+const NAV = [
+  { id: 'works', label: 'Works' },
+  { id: 'about', label: 'About' },
+  { id: 'home', label: 'Home' },
+];
 
-function Nav(props: Props) {
-  const { items, ...rest } = props;
-
+function Nav(props: Object) {
   return (
-    <NavWrapper {...rest}>
-      {items.map(item => (
+    <NavWrapper {...props}>
+      {NAV.map(item => (
         <Link
           activeClass="active"
           to={item.id}

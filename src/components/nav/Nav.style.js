@@ -1,7 +1,5 @@
 // @flow
 import styled from 'styled-components';
-import { layout } from 'styled-system';
-import { isGreaterThan, isLessThan } from '../../utils/media';
 
 export const NavWrapper = styled.div`
   position: fixed;
